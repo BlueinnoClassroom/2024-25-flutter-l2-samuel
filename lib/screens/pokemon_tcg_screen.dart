@@ -11,6 +11,13 @@ class PokemonTcgScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       drawer: RouteDrawer(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.pushReplacementNamed(context, '/pokemon-draw');
+        },
+        label: Text('Gatcha'),
+        icon: Icon(Icons.gamepad_rounded),
+      ),
       body: GridView.builder(
         itemCount: dp1.length,
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

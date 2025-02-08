@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lesson2/screens/Pokemon_draw_screen.dart';
 import 'package:lesson2/screens/fifa_screen.dart';
 import 'package:lesson2/screens/magic_screen.dart';
 import 'package:lesson2/screens/pokemon_screen.dart';
@@ -18,6 +19,11 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) {
+        if (settings.name == '/pokemon-draw') {
+          return CupertinoPageRoute(
+            builder: (context) => PokemonDrawScreen(),
+          );
+        }
         if (settings.name == '/pokemon-tcg') {
           return CupertinoPageRoute(
             builder: (context) => PokemonTcgScreen(),
