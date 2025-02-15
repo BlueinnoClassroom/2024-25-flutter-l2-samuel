@@ -45,7 +45,7 @@ class MainApp extends StatelessWidget {
           );
         }
         return CupertinoPageRoute(
-          builder: (context) => PokemonScreen(),
+          builder: (context) => YuGiOhScreen(),
         );
       },
     );
