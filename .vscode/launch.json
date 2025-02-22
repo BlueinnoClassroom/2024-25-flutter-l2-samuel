@@ -8,7 +8,6 @@
             "name": "lesson2",
             "request": "launch",
             "type": "dart",
-            "args": ["--enable-software-rendering"]
         },
         {
             "name": "lesson2 (profile mode)",
