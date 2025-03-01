@@ -1,0 +1,114 @@
+{
+  "xy1": {
+    "Rare Holo EX": 8,
+    "Common": 48,
+    "Uncommon": 42,
+    "Rare": 26,
+    "Rare Holo": 16,
+    "Rare Ultra": 6
+  },
+  "xy2": {
+    "Common": 31,
+    "Uncommon": 32,
+    "Rare": 20,
+    "Rare Holo": 8,
+    "Rare Holo EX": 8,
+    "Rare Ultra": 8,
+    "Rare Secret": 3
+  },
+  "xy3": {
+    "Common": 29,
+    "Uncommon": 39,
+    "Rare Holo": 9,
+    "Rare Holo EX": 7,
+    "Rare": 20,
+    "Rare Ultra": 8,
+    "Rare Secret": 2
+  },
+  "xy4": {
+    "Common": 34,
+    "Rare": 19,
+    "Uncommon": 37,
+    "Rare Holo": 14,
+    "Rare Holo EX": 8,
+    "Rare Ultra": 9,
+    "Rare Secret": 3
+  },
+  "xy5": {
+    "Common": 39,
+    "Uncommon": 50,
+    "Rare": 25,
+    "Rare Holo": 18,
+    "Rare Holo EX": 12,
+    "Rare Ultra": 16,
+    "Rare Secret": 4
+  },
+  "xy6": {
+    "Common": 26,
+    "Uncommon": 33,
+    "Rare Holo": 10,
+    "Rare": 18,
+    "Rare Holo EX": 11,
+    "Rare Ultra": 12,
+    "Rare Secret": 2
+  },
+  "xy7": {
+    "Common": 23,
+    "Uncommon": 28,
+    "Rare": 13,
+    "Rare Holo EX": 11,
+    "Rare Holo": 8,
+    "Rare Ultra": 13,
+    "Rare Secret": 5
+  },
+  "xy8": {
+    "Common": 53,
+    "Rare": 21,
+    "Uncommon": 49,
+    "Rare Holo": 16,
+    "Rare BREAK": 6,
+    "Rare Holo EX": 8,
+    "Rare Ultra": 10,
+    "Rare Secret": 2
+  },
+  "xy9": {
+    "Common": 33,
+    "Uncommon": 43,
+    "Rare Holo": 7,
+    "Rare": 16,
+    "Rare Holo EX": 11,
+    "Rare BREAK": 5,
+    "Rare Ultra": 10,
+    "Rare Secret": 1
+  },
+  "xy10": {
+    "Uncommon": 46,
+    "Common": 26,
+    "Rare": 20,
+    "Rare Holo": 5,
+    "Rare BREAK": 5,
+    "Rare Holo EX": 13,
+    "Rare Ultra": 13,
+    "Rare Secret": 1
+  },
+  "xy11": {
+    "Common": 31,
+    "Uncommon": 30,
+    "Rare": 23,
+    "Rare BREAK": 7,
+    "Rare Holo": 9,
+    "Rare Holo EX": 6,
+    "Rare Ultra": 8,
+    "Rare Secret": 2
+  },
+  "xy12": {
+    "Rare Holo EX": 12,
+    "Common": 33,
+    "Uncommon": 28,
+    "Rare": 9,
+    "Rare Holo": 13,
+    "Rare BREAK": 4,
+    "Rare Ultra": 9,
+    "Rare Secret": 5
+  }
+}
