@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:math';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
+import 'package:scratcher/scratcher.dart';
 import 'package:lesson2/cards/pokemon_card.dart';
 import 'package:lesson2/cards/xy1.dart';
 import 'package:lesson2/cards/xy2.dart';
@@ -199,6 +198,7 @@ class _YuGiOhScreenState extends State<YuGiOhScreen> {
                     return Placeholder();
                   },
                 ),
+
                 // Positioned(
                 //   top: 10,
                 //   left: 30,
