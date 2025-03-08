@@ -189,36 +189,55 @@ class _YuGiOhScreenState extends State<YuGiOhScreen> {
                     final prob = rareProbs[rarity];
 
                     if (small != null) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                rarity,
-                                style: GoogleFonts.getFont('Honk').copyWith(
-                                  fontSize: 20,
+                      return RarityEffect(
+                        color: color,
+                        rarity: rarity,
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () => showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                content: AspectRatio(
+                                  aspectRatio: 734 / 1024,
+                                  child: RarityEffect(
+                                    color: color,
+                                    rarity: rarity,
+                                    child: InteractiveViewer(
+                                      child: Image.network(
+                                        card.images?.large ?? small,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                              if (prob != null)
-                                Text('(${rareProbs[rarity]}%)')
-                              else
-                                SizedBox(),
-                            ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      rarity,
+                                      style:
+                                          GoogleFonts.getFont('Honk').copyWith(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    if (prob != null)
+                                      Text('(${rareProbs[rarity]}%)')
+                                    else
+                                      SizedBox(),
+                                  ],
+                                ),
+                                Image.network(small),
+                              ],
+                            ),
                           ),
-                          Image.network(small),
-                        ],
-                      )
-                          .animate(
-                              onPlay: (controller) => isRare
-                                  ? controller.repeat()
-                                  : controller.stop())
-                          .shimmer(
-                            color: color,
-                            duration: 2000.ms,
-                            angle: -pi / 8,
-                          );
+                        ),
+                      );
                     }
 
                     return Placeholder();
@@ -267,4 +286,35 @@ class _YuGiOhScreenState extends State<YuGiOhScreen> {
 
 //     print(jsonEncode(results));
 //   }
+}
+
+class RarityEffect extends StatelessWidget {
+  const RarityEffect({
+    super.key,
+    required this.color,
+    required this.rarity,
+    required this.child,
+  });
+
+  final Color color;
+  final String rarity;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final isRare = !['Uncommon', 'Common'].contains(rarity);
+
+    return Animate(
+      onPlay: (controller) => isRare ? controller.repeat() : controller.stop(),
+      effects: [
+        if (isRare)
+          ShimmerEffect(
+            color: color,
+            duration: 1.8.seconds,
+            angle: -pi / 8,
+          ),
+      ],
+      child: child,
+    );
+  }
 }
