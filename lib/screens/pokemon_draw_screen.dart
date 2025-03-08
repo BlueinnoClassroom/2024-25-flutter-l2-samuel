@@ -87,7 +87,26 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () => showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final prob in rareProbs.entries)
+                      Text('${prob.key}: ${prob.value}%')
+                  ],
+                ),
+              ),
+            ),
+            icon: Icon(Icons.help_outline),
+          ),
+        ],
+      ),
       drawer: RouteDrawer(),
       body: Column(
         children: [
