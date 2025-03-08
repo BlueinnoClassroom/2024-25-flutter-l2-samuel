@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scratcher/scratcher.dart';
 import 'package:lesson2/cards/pokemon_card.dart';
 import 'package:lesson2/cards/xy1.dart';
@@ -85,7 +87,26 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () => showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final prob in rareProbs.entries)
+                      Text('${prob.key}: ${prob.value}%')
+                  ],
+                ),
+              ),
+            ),
+            icon: Icon(Icons.help_outline),
+          ),
+        ],
+      ),
       drawer: RouteDrawer(),
       body: Column(
         children: [
@@ -160,7 +181,7 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
                   itemCount: _cards.length,
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 245,
-                    childAspectRatio: 245 / 370,
+                    childAspectRatio: 245 / (370 + 6),
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8,
                   ),
@@ -170,6 +191,7 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
                     final rarity = card.rarity ?? 'NA';
                     final color = colorMap[rarity] ?? Colors.black;
                     final scratchKey = GlobalKey<ScratcherState>();
+                    final prob = rareProbs[rarity];
 
                     if (small != null) {
                       return Scratcher(
@@ -186,14 +208,30 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
                             _confettiController.play();
                           }
                         },
-                        child: Column(
-                          children: [
-                            Text(
-                              rarity,
-                              style: TextStyle(color: color),
-                            ),
-                            Image.network(small),
-                          ],
+                        child: RarityEffect(
+                          color: color,
+                          rarity: rarity,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    rarity,
+                                    style: GoogleFonts.getFont('Honk').copyWith(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  if (prob != null)
+                                    Text('(${rareProbs[rarity]}%)')
+                                  else
+                                    SizedBox(),
+                                ],
+                              ),
+                              Image.network(small),
+                            ],
+                          ),
                         ),
                       );
                     }
@@ -243,4 +281,35 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
 
 //     print(jsonEncode(results));
 //   }
+}
+
+class RarityEffect extends StatelessWidget {
+  const RarityEffect({
+    super.key,
+    required this.color,
+    required this.rarity,
+    required this.child,
+  });
+
+  final Color color;
+  final String rarity;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final isRare = !['Uncommon', 'Common'].contains(rarity);
+
+    return Animate(
+      onPlay: (controller) => isRare ? controller.repeat() : controller.stop(),
+      effects: [
+        if (isRare)
+          ShimmerEffect(
+            color: color,
+            duration: 1.8.seconds,
+            angle: -pi / 8,
+          ),
+      ],
+      child: child,
+    );
+  }
 }
