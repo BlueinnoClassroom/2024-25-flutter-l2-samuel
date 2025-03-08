@@ -4,7 +4,9 @@ import 'dart:math';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lesson2/cards/pokemon_card.dart';
 import 'package:lesson2/cards/xy1.dart';
 import 'package:lesson2/cards/xy2.dart';
@@ -174,7 +176,7 @@ class _YuGiOhScreenState extends State<YuGiOhScreen> {
                   itemCount: _cards.length,
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 245,
-                    childAspectRatio: 245 / 364,
+                    childAspectRatio: 245 / (364 + 20),
                     mainAxisSpacing: 8,
                     crossAxisSpacing: 8,
                   ),
@@ -183,17 +185,40 @@ class _YuGiOhScreenState extends State<YuGiOhScreen> {
                     final small = card.images?.small;
                     final rarity = card.rarity ?? 'NA';
                     final color = colorMap[rarity] ?? Colors.black;
+                    final isRare = !['Uncommon', 'Common'].contains(rarity);
+                    final prob = rareProbs[rarity];
 
                     if (small != null) {
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text(
-                            rarity,
-                            style: TextStyle(color: color),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                rarity,
+                                style: GoogleFonts.getFont('Honk').copyWith(
+                                  fontSize: 20,
+                                ),
+                              ),
+                              if (prob != null)
+                                Text('(${rareProbs[rarity]}%)')
+                              else
+                                SizedBox(),
+                            ],
                           ),
                           Image.network(small),
                         ],
-                      );
+                      )
+                          .animate(
+                              onPlay: (controller) => isRare
+                                  ? controller.repeat()
+                                  : controller.stop())
+                          .shimmer(
+                            color: color,
+                            duration: 2000.ms,
+                            angle: -pi / 8,
+                          );
                     }
 
                     return Placeholder();
