@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lesson2/screens/Pokemon_draw_screen.dart';
 import 'package:lesson2/screens/fifa_screen.dart';
 import 'package:lesson2/screens/magic_screen.dart';
 import 'package:lesson2/screens/pokemon_screen.dart';
 import 'package:lesson2/screens/pokemon_tcg_screen.dart';
+import 'package:lesson2/screens/pokemon_draw_screen.dart';
 import 'package:lesson2/screens/yu_gi_oh_screen.dart';
 
 void main() {
@@ -45,7 +45,7 @@ class MainApp extends StatelessWidget {
           );
         }
         return CupertinoPageRoute(
-          builder: (context) => YuGiOhScreen(),
+          builder: (context) => PokemonScreen(),
         );
       },
     );
