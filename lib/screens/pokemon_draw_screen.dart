@@ -3,6 +3,30 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
+import 'package:lesson2/cards/base1.dart';
+import 'package:lesson2/cards/base2.dart';
+import 'package:lesson2/cards/base3.dart';
+import 'package:lesson2/cards/base4.dart';
+import 'package:lesson2/cards/base5.dart';
+import 'package:lesson2/cards/base6.dart';
+import 'package:lesson2/cards/bw1.dart';
+import 'package:lesson2/cards/bw10.dart';
+import 'package:lesson2/cards/bw11.dart';
+import 'package:lesson2/cards/bw2.dart';
+import 'package:lesson2/cards/bw3.dart';
+import 'package:lesson2/cards/bw4.dart';
+import 'package:lesson2/cards/bw5.dart';
+import 'package:lesson2/cards/bw6.dart';
+import 'package:lesson2/cards/bw7.dart';
+import 'package:lesson2/cards/bw8.dart';
+import 'package:lesson2/cards/bw9.dart';
+import 'package:lesson2/cards/dp1.dart';
+import 'package:lesson2/cards/dp2.dart';
+import 'package:lesson2/cards/dp3.dart';
+import 'package:lesson2/cards/dp4.dart';
+import 'package:lesson2/cards/dp5.dart';
+import 'package:lesson2/cards/dp6.dart';
+import 'package:lesson2/cards/dp7.dart';
 import 'package:scratcher/scratcher.dart';
 import 'package:lesson2/cards/pokemon_card.dart';
 import 'package:lesson2/cards/xy1.dart';
@@ -28,11 +52,37 @@ class PokemonDrawScreen extends StatefulWidget {
 }
 
 class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
-  final _confettiController =
-      ConfettiController(duration: Duration(seconds: 2));
+  final confettiControllers = <ConfettiController>[];
+
   final _fortuneBarController = StreamController<int>();
 
+  final drawCount = 6;
+
   final _packs = [
+    ('base1', base1),
+    ('base2', base2),
+    ('base3', base3),
+    ('base4', base4),
+    ('base5', base5),
+    ('base6', base6),
+    ('bw1', bw1),
+    ('bw2', bw2),
+    ('bw3', bw3),
+    ('bw4', bw4),
+    ('bw5', bw5),
+    ('bw6', bw6),
+    ('bw7', bw7),
+    ('bw8', bw8),
+    ('bw9', bw9),
+    ('bw10', bw10),
+    ('bw11', bw11),
+    ('dp1', dp1),
+    ('dp2', dp2),
+    ('dp3', dp3),
+    ('dp4', dp4),
+    ('dp5', dp5),
+    ('dp6', dp6),
+    ('dp7', dp7),
     ('xy1', xy1),
     ('xy2', xy2),
     ('xy3', xy3),
@@ -48,12 +98,14 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
   ];
 
   final rareProbs = {
-    'Rare': 5.0,
-    'Rare Holo': 2.5,
-    "Rare BREAK": 0.7,
-    "Rare Holo EX": 1.0,
-    "Rare Ultra": 1.0,
-    "Rare Secret": 0.5
+    'Rare': 6.0,
+    'Rare Holo': 3.0,
+    "Rare BREAK": 1.0,
+    "Rare Holo EX": 1.5,
+    "Rare Ultra": 1.5,
+    "Rare Secret": 0.7,
+    "Rare Holo LV.X": 0.7,
+    "Rare ACE": 0.5,
   };
 
   final colorMap = {
@@ -65,6 +117,7 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
     'Rare Secret': Colors.black,
     "Rare BREAK": Colors.blue,
     "Rare Ultra": Colors.blue,
+    "Rare Holo LV.X": Colors.black,
   };
 
   final _cards = <PokemonCard>[];
@@ -73,11 +126,18 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
   void initState() {
     super.initState();
     // _confettiController.play();
+
+    confettiControllers.addAll(List.generate(
+      drawCount,
+      (index) => ConfettiController(duration: Duration(seconds: 2)),
+    ));
   }
 
   @override
   void dispose() {
-    _confettiController.dispose();
+    for (final controller in confettiControllers) {
+      controller.dispose();
+    }
     _fortuneBarController.close();
     super.dispose();
   }
@@ -109,7 +169,7 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
               final availableRares = allCards
                   .map((e) => e.rarity)
                   .toSet()
-                  .where((e) => e?.startsWith('Rare') ?? false);
+                  .where((e) => e != null && e.startsWith('Rare'));
 
               final rarities = <String, num>{};
               var remaining = 100.0;
@@ -117,10 +177,10 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
                 rarities[r!] = rareProbs[r]!;
                 remaining -= rareProbs[r]!;
               }
-              rarities['Uncommon'] = remaining * 0.35;
-              rarities['Common'] = remaining * 0.65;
+              rarities['Uncommon'] = remaining * 0.20;
+              rarities['Common'] = remaining * 0.80;
 
-              for (var i = 0; i < 6; i++) {
+              for (var i = 0; i < drawCount; i++) {
                 final random = Random().nextDouble() * 100;
                 var cumulative = 0.0;
                 var rarity = '';
@@ -183,7 +243,7 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
 
                           final rareKeys = rareProbs.keys;
                           if (rareKeys.contains(rarity)) {
-                            _confettiController.play();
+                            confettiControllers[index].play();
                           }
                         },
                         child: Column(
@@ -200,18 +260,19 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
                     return Placeholder();
                   },
                 ),
-                Positioned(
-                  top: 10,
-                  left: 30,
-                  child: ConfettiWidget(
-                    confettiController: _confettiController,
-                    shouldLoop: false,
-                    emissionFrequency: 0,
-                    maxBlastForce: 20,
-                    blastDirection: pi * 0.25,
-                    numberOfParticles: 200,
+                for (final controller in confettiControllers)
+                  Positioned(
+                    top: 10,
+                    left: 30,
+                    child: ConfettiWidget(
+                      confettiController: controller,
+                      shouldLoop: false,
+                      emissionFrequency: 0,
+                      maxBlastForce: 20,
+                      blastDirection: pi * 0.25,
+                      numberOfParticles: 200,
+                    ),
                   ),
-                ),
               ],
             ),
           ),
