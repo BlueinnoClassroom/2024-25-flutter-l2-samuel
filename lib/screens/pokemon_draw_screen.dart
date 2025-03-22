@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -52,7 +53,8 @@ class PokemonDrawScreen extends StatefulWidget {
 }
 
 class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
-  final confettiControllers = <ConfettiController>[];
+  final confettiControllers1 = <ConfettiController>[];
+  final confettiControllers2 = <ConfettiController>[];
 
   final _fortuneBarController = StreamController<int>();
 
@@ -115,9 +117,10 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
     'Rare Holo': Colors.amber,
     'Rare Holo EX': Colors.red,
     'Rare Secret': Colors.black,
-    "Rare BREAK": Colors.blue,
+    "Rare BREAK": Colors.cyan,
     "Rare Ultra": Colors.blue,
-    "Rare Holo LV.X": Colors.black,
+    "Rare Holo LV.X": Colors.indigo,
+    "Rare ACE": Colors.lightBlue,
   };
 
   final _cards = <PokemonCard>[];
@@ -127,7 +130,11 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
     super.initState();
     // _confettiController.play();
 
-    confettiControllers.addAll(List.generate(
+    confettiControllers1.addAll(List.generate(
+      drawCount,
+      (index) => ConfettiController(duration: Duration(seconds: 2)),
+    ));
+    confettiControllers2.addAll(List.generate(
       drawCount,
       (index) => ConfettiController(duration: Duration(seconds: 2)),
     ));
@@ -135,7 +142,10 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
 
   @override
   void dispose() {
-    for (final controller in confettiControllers) {
+    for (final controller in confettiControllers1) {
+      controller.dispose();
+    }
+    for (final controller in confettiControllers2) {
       controller.dispose();
     }
     _fortuneBarController.close();
@@ -177,8 +187,8 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
                 rarities[r!] = rareProbs[r]!;
                 remaining -= rareProbs[r]!;
               }
-              rarities['Uncommon'] = remaining * 0.20;
-              rarities['Common'] = remaining * 0.80;
+              rarities['Uncommon'] = remaining * 0.25;
+              rarities['Common'] = remaining * 0.75;
 
               for (var i = 0; i < drawCount; i++) {
                 final random = Random().nextDouble() * 100;
@@ -243,7 +253,12 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
 
                           final rareKeys = rareProbs.keys;
                           if (rareKeys.contains(rarity)) {
-                            confettiControllers[index].play();
+                            if ('Rare Holo'.contains(rarity)) {
+                              confettiControllers1[index].play();
+                            } else {
+                              confettiControllers1[index].play();
+                              confettiControllers2[index].play();
+                            }
                           }
                         },
                         child: Column(
@@ -260,16 +275,29 @@ class _PokemonDrawScreenState extends State<PokemonDrawScreen> {
                     return Placeholder();
                   },
                 ),
-                for (final controller in confettiControllers)
+                for (final controller in confettiControllers1)
                   Positioned(
                     top: 10,
                     left: 30,
                     child: ConfettiWidget(
                       confettiController: controller,
-                      shouldLoop: false,
+                      shouldLoop: true,
                       emissionFrequency: 0,
                       maxBlastForce: 20,
                       blastDirection: pi * 0.25,
+                      numberOfParticles: 200,
+                    ),
+                  ),
+                for (final controller in confettiControllers2)
+                  Positioned(
+                    top: 10,
+                    right: 30,
+                    child: ConfettiWidget(
+                      confettiController: controller,
+                      shouldLoop: true,
+                      emissionFrequency: 0,
+                      maxBlastForce: 20,
+                      blastDirection: pi * 0.75,
                       numberOfParticles: 200,
                     ),
                   ),

@@ -28,3 +28,9 @@ flutter:
     - images/pokedex/
     - images/pokedex/hires/
     - images/pokedex/sprites/
+  fonts:
+    - family: Play
+      fonts:
+        - asset: fonts/Play-Regular.ttf
+        - asset: fonts/Play-Bold.ttf
+          weight: 700

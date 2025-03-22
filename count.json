@@ -1,4 +1,178 @@
 {
+  "base1": {
+    "Rare Holo": 16,
+    "Rare": 16,
+    "Uncommon": 32,
+    "Common": 32,
+    "NA": 6
+  },
+  "base2": { "Rare Holo": 16, "Rare": 16, "Uncommon": 16, "Common": 16 },
+  "base3": { "Rare Holo": 15, "Rare": 15, "Uncommon": 16, "Common": 16 },
+  "base4": {
+    "Rare Holo": 20,
+    "Rare": 20,
+    "Uncommon": 42,
+    "Common": 42,
+    "NA": 6
+  },
+  "base5": {
+    "Rare Holo": 17,
+    "Rare": 17,
+    "Uncommon": 24,
+    "Common": 24,
+    "Rare Secret": 1
+  },
+  "base6": { "Rare Holo": 19, "Rare": 19, "Uncommon": 36, "Common": 36 },
+  "bw1": {
+    "Common": 44,
+    "Uncommon": 37,
+    "Rare Holo": 12,
+    "Rare": 19,
+    "Rare Ultra": 2,
+    "Rare Secret": 1
+  },
+  "bw2": {
+    "Common": 34,
+    "Rare": 21,
+    "Uncommon": 31,
+    "Rare Holo": 10,
+    "Rare Ultra": 2
+  },
+  "bw3": {
+    "Common": 31,
+    "Uncommon": 30,
+    "Rare Holo": 13,
+    "Rare": 22,
+    "Rare Ultra": 5,
+    "Rare Secret": 1
+  },
+  "bw4": {
+    "Rare": 21,
+    "Common": 29,
+    "Uncommon": 27,
+    "Rare Holo EX": 6,
+    "Rare Holo": 10,
+    "Rare Ultra": 6,
+    "Rare Secret": 4
+  },
+  "bw5": {
+    "Common": 33,
+    "Uncommon": 35,
+    "Rare Holo": 9,
+    "Rare": 19,
+    "Rare Holo EX": 6,
+    "Rare Ultra": 6,
+    "Rare Secret": 3
+  },
+  "bw6": {
+    "Common": 39,
+    "Uncommon": 36,
+    "Rare": 24,
+    "Rare Holo": 13,
+    "Rare Holo EX": 6,
+    "Rare Ultra": 6,
+    "Rare Secret": 4
+  },
+  "bw7": {
+    "Common": 50,
+    "Uncommon": 43,
+    "Rare Holo": 20,
+    "Rare": 17,
+    "Rare Holo EX": 6,
+    "Rare ACE": 4,
+    "Rare Ultra": 9,
+    "Rare Secret": 4
+  },
+  "bw8": {
+    "Common": 41,
+    "Uncommon": 42,
+    "Rare": 26,
+    "Rare Holo EX": 8,
+    "Rare Holo": 10,
+    "Rare ACE": 3,
+    "Rare Ultra": 5,
+    "Rare Secret": 3
+  },
+  "bw9": {
+    "Common": 32,
+    "Uncommon": 32,
+    "Rare": 22,
+    "Rare Holo": 14,
+    "Rare Holo EX": 6,
+    "Rare ACE": 2,
+    "Rare Ultra": 8,
+    "Rare Secret": 6
+  },
+  "bw10": {
+    "Common": 26,
+    "Rare": 15,
+    "Uncommon": 33,
+    "Rare Holo EX": 6,
+    "Rare Holo": 11,
+    "Rare ACE": 4,
+    "Rare Ultra": 6,
+    "Rare Secret": 4
+  },
+  "bw11": {
+    "Common": 37,
+    "Rare": 13,
+    "Uncommon": 41,
+    "Rare Holo": 30,
+    "Rare Holo EX": 12,
+    "Rare Secret": 2,
+    "Rare Ultra": 5
+  },
+  "dp1": {
+    "Rare Holo": 17,
+    "Rare": 25,
+    "Uncommon": 38,
+    "Common": 47,
+    "Rare Holo LV.X": 3
+  },
+  "dp2": {
+    "Rare Holo": 18,
+    "Rare": 23,
+    "Uncommon": 37,
+    "Common": 42,
+    "Rare Holo LV.X": 3,
+    "Rare Secret": 1
+  },
+  "dp3": {
+    "Rare Holo": 20,
+    "Rare": 24,
+    "Uncommon": 41,
+    "Common": 45,
+    "Rare Holo LV.X": 2
+  },
+  "dp4": {
+    "Rare Holo": 11,
+    "Rare": 21,
+    "Uncommon": 32,
+    "Common": 38,
+    "Rare Holo LV.X": 4
+  },
+  "dp5": {
+    "Rare Holo": 14,
+    "Rare": 20,
+    "Uncommon": 30,
+    "Common": 32,
+    "Rare Holo LV.X": 4
+  },
+  "dp6": {
+    "Rare Holo": 17,
+    "Rare": 28,
+    "Uncommon": 46,
+    "Common": 48,
+    "Rare Holo LV.X": 7
+  },
+  "dp7": {
+    "Rare Holo": 11,
+    "Rare": 23,
+    "Uncommon": 33,
+    "Common": 31,
+    "Rare Holo LV.X": 5,
+    "Rare Secret": 3
+  },
   "xy1": {
     "Rare Holo EX": 8,
     "Common": 48,
